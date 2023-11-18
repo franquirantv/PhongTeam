@@ -2,6 +2,9 @@ import { ElementRef,Injectable,NgZone } from '@angular/core';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { setLoadingSpinnerForDetails } from '../store/shared/shared.action';
+import { Store } from '@ngrx/store';
+import { SharedState } from '../store/shared/shared.state';
 
 // const explo = new ExplorarComponent(
 //   usuariosServiceInstance, // reemplaza usuariosServiceInstance con una instancia real de UsuariosService
@@ -31,7 +34,8 @@ let numCamaras = 5;
 export class EngineService {
 public coche = "";
 
-  constructor(private ngZone: NgZone
+  constructor(private ngZone: NgZone,
+              private store: Store<SharedState>
               // public explo: ExplorarComponent
               ) {}
 
@@ -109,6 +113,8 @@ public coche = "";
 
 
 public cargarCoche(file: File) {
+  this.store.dispatch(setLoadingSpinnerForDetails({ status: true })); // Iniciar carga
+
 
   const loader = new GLTFLoader();
   // console.log("MESH",mesh)
@@ -124,6 +130,7 @@ public cargarCoche(file: File) {
 
       // Cargar el modelo GLTF
       loader.parse(gltfContent, '', (gltf) => {
+        this.store.dispatch(setLoadingSpinnerForDetails({ status: false }));
         console.log(gltf);
         escenacoche=gltf.scene;
         scene.add(escenacoche);

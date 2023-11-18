@@ -11,7 +11,15 @@
           <div class="form-group d-flex flex-column">
             <input name="upload" type="file" (change)="onFileSelected($event)">
           </div>
-          <button type="submit" class="btn btn-primary mt-4" (click)="onUpload()">Subir</button>
+          <div
+          *ngIf="
+            fileForm.get('fileName')?.hasError('required') &&
+            (fileForm.get('fileName')?.touched || submitted)
+          "
+          class="error-message">
+          El archivo es obligatorio.
+        </div>
+          <button type="submit" class="btn btn-primary mt-4" (click)="onUpload($event)">Subir</button>
         </form>
       </section>
     </div>
@@ -21,7 +29,10 @@
 <!-- Cuando se carga el modelo -->
 
 <section class="container mt-103">
-
+  <span class="overlay" *ngIf="showLoading$ | async"></span>
+  <div class="spinner" *ngIf="showLoading$ | async">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
 <div class="d-flex justify-content-center" #rendererCanvas></div>
 
 <!-- Botón de volver a subir-->
