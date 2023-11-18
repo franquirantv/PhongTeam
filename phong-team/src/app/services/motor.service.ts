@@ -23,7 +23,7 @@ let coche = "C:\Users\amban\PhongTeam\phong-team\src\assets\coches\Audi.gltf";
 })
 
 export class EngineService {
-public coche = "./../../../assets/coches/Audi.gltf";
+public coche = "./../../../assets/coches/Audi2.gltf";
 
   constructor(private ngZone: NgZone
               // public explo: ExplorarComponent
@@ -42,7 +42,7 @@ public coche = "./../../../assets/coches/Audi.gltf";
      if(window.innerWidth > 360 && window.innerWidth < 769 )
       renderer.setSize( window.innerWidth, window.innerHeight );
      else
-      renderer.setSize( window.innerWidth*0.5, window.innerHeight-1 );
+      renderer.setSize( window.innerWidth*0.989, window.innerHeight-1 );
 
     // stats = Stats();
     //// console.log("STATS",stats);
@@ -87,9 +87,15 @@ public CargarCoche() {
   const loader = new GLTFLoader();
   // console.log("MESH",mesh);
 
-  loader.load(this.coche , function ( gltf ) {
-    //// console.log("MESIIIIII1",gltf.scene.children[ 0 ]);
-       mesh = gltf.scene.children[ 0 ];
+  console.log("MESIIIIII1",this.coche);
+  let escenarecibida;
+  loader.load(this.coche , ( gltf ) => {
+    console.log("MESIIIIII1",gltf.scene.children[ 0 ]);
+      //  mesh = gltf.scene;
+       escenarecibida = new THREE.Mesh();
+
+       escenarecibida=gltf.scene;
+
       // mesh = gltf;
       //  mesh.material = new THREE.MeshPhongMaterial( {
         //  specular: 0x111111,
@@ -104,15 +110,15 @@ public CargarCoche() {
       //  mesh.transparent = 0.5;
       // // console.log("MESIIIIII2",scene);
 
-       scene.add( mesh );
+       scene.add( escenarecibida );
        //// console.log("MESIIIIII3",scene);
-       mesh.scale.set( 60, 60, 60 ); //CUERPO
-       mesh.position.y= -65;//CUERPO
-       // mesh.scale.set( 10, 10, 10 ); //CABEZA
+       escenarecibida.scale.set( 60, 60, 60 ); //CUERPO
+      //  mesh.position.y= -65;//CUERPO
+      // escenarecibida.scale.set( 10, 10, 10 ); //CABEZA
        // mesh.position.y=-5;
 
 
-     } );
+     });
 
 }
 

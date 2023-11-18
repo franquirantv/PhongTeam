@@ -35,7 +35,6 @@ export class PrincipalComponent implements OnInit {
   resetUpload() {
     this.fileUploaded = new File([], '');
     this.fileRecieved = false;
-
   }
 
 
