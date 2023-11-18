@@ -6,10 +6,9 @@ import { PrincipalComponent } from './pages/principal/principal.component';
 const routes: Routes = [
   // Ruta de redirección para rutas no definidas
 
-  // { path: '**', redirectTo: 'landing' },
+  { path: '', redirectTo: 'landing', pathMatch: 'full' },
   { path: 'landing', component: LandingComponent },
   { path: 'principal', component: PrincipalComponent },
-  { path: '', redirectTo: 'landing', pathMatch: 'full' },
 
 ];
 @NgModule({
