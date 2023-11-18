@@ -57,6 +57,8 @@ export class PrincipalComponent implements OnInit {
   onUpload(){
     this.closeModal();
     console.log(this.fileUploaded);
+    // this.engServ.CrearGaleria();
+    console.log(this.engServ.CrearGaleria());
   }
 
   resetUpload() {

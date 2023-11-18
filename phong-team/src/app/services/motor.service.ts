@@ -13,11 +13,11 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 let renderer: THREE.WebGLRenderer, scene: THREE.Object3D, camera: THREE.Camera, stats;
 let mesh;
 let coche = "C:\Users\amban\PhongTeam\phong-team\src\assets\coches\Audi.gltf";
-let camara1;
-let camara2;
-let camara3;
-let camara4;
-let camara5;
+let camara1: THREE.Camera;
+let camara2: THREE.Camera;
+let camara3: THREE.Camera;
+let camara4: THREE.Camera;
+let camara5: THREE.Camera;
 let numCamaras = 5;
 
 
@@ -57,7 +57,7 @@ public coche = "./../../../assets/coches/Audi2.gltf";
     //// console.log("STATS",stats);
     scene = new THREE.Scene();
 
-    
+
     if(window.innerWidth > 360 && window.innerWidth < 769 ){
       camera = new THREE.PerspectiveCamera( 45, window.innerWidth/ window.innerHeight, 1, 1000 );
       camara1 = camera;
@@ -91,7 +91,7 @@ public coche = "./../../../assets/coches/Audi2.gltf";
 
     scene.add( new THREE.AmbientLight( 0x443333,2) );
 
-    
+
 
     var ambientLight = new THREE.AmbientLight(0xffffff, 1); // El segundo parámetro es la intensidad
     scene.add(ambientLight);
@@ -100,7 +100,7 @@ public coche = "./../../../assets/coches/Audi2.gltf";
     var directionalLight = new THREE.DirectionalLight(0xffffff, 1); // El segundo parámetro es la intensidad
     directionalLight.position.set(1, 1, 0); // La posición de la luz direccional
     scene.add(directionalLight);
-    
+
     this.CargarCoche();
 
   }
@@ -127,37 +127,71 @@ public CrearGaleria(){
 
   let imagenes = [];
 
-  for(let i=0; i < numCamaras; i++){
+  // for(let i=0; i < numCamaras; i++){
     // Creamos el WebGLRenderTarget
     const renderTarget = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight);
-      
+
     // Renderizamos la escena en el objeto de textura
     renderer.setRenderTarget(renderTarget);
-    renderer.render(scene, camera);
+    renderer.render(scene, camara1);
     renderer.setRenderTarget(null);
-    
+
+    console.log(renderTarget);
+    console.log(renderTarget.texture.image.src);
+
     // Creamos un elemento de lienzo donde copiamos el renderTarget
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
 
     // Copiar el contenido del renderTarget al lienzo
     if (context) {
-      context.canvas.width = renderTarget.width; // asignamos el ancho del canvas al lienzo
-      context.canvas.height = renderTarget.height; // asignamos el alto del canvas al lienzo
-      context.drawImage(renderTarget.texture.image, 0, 0);
-      
-      // Obtener la URL de datos
-      const dataURL = canvas.toDataURL("image/png");
-      console.log(dataURL);
+      // Create a new THREE.TextureLoader
+      const loader = new THREE.TextureLoader();
+      // Load the texture from the render target
+      context.canvas.width = context.canvas.height = renderTarget.height; // asignamos el alto del canvas al lienzo
 
-      // Puedes usar dataURL como desees, por ejemplo, asignarlo a la fuente de una imagen
-    
-      image.src = dataURL;
+      const image = new Image();
+      console.log(renderTarget.texture.image);
+      image.src = renderTarget.texture.image;
+
+      image.onload = () => {
+        // Draw the image onto the canvas
+        context.drawImage(image, 0, 0);
+
+        // Get the data URL
+        const dataURL = canvas.toDataURL("image/png");
+        console.log(dataURL);
+
+        // You can use dataURL as desired, for example, assign it to the source of an image
+
+        image.src = dataURL;
+
+        imagenes.push(image.src);
+      };
+
+      // Set the source of the image to the render target texture image
+      // image.src = renderTarget.texture.image.src;
+
+      //   // When the image has loaded, draw it onto the canvas
+      //   image.onload = () => {
+      //     context.drawImage(image, 0, 0);
+      //   };
+
+      // context.canvas.height = renderTarget.height; // asignamos el alto del canvas al lienzo
+      // context.drawImage(renderTarget.texture.image, 0, 0);
+
+      // // Obtener la URL de datos
+      // const dataURL = canvas.toDataURL("image/png");
+      // console.log(dataURL);
+
+      // // Puedes usar dataURL como desees, por ejemplo, asignarlo a la fuente de una imagen
+
+      // image.src = dataURL;
 
       imagenes.push(image.src);
     }
-  }
-  return image.src;
+  // }
+  return imagenes;
 }
 
 
@@ -177,9 +211,9 @@ public render(): void {
   let frameId = requestAnimationFrame(() => {
     this.animate();
   });
-  
+
   renderer.render( scene, camera );
-  
+
 }
 
 
