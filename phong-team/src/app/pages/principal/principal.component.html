@@ -1,1 +1,54 @@
-<p>principal works!</p>
+<!-- Antes de cargar el modelo -->
+<ng-container *ngIf="!fileRecieved else modeloCargado">
+<section class="container d-flex justify-content-center min-height align-items-center">
+  <form class="p-4 d-flex flex-column form-border">
+    <h2>Sube aquí tu modelo</h2>
+    <div class="form-group">
+      <label for="copy">Frase publicitaria</label><small class="text-muted"> (opcional)</small>
+      <input type="text" name="copy" id="copy-phrase" class="form-control mb-4">
+    </div>
+    <div class="form-group d-flex flex-column">
+      <!-- <label for="upload">Example file input</label> -->
+      <input name="upload" type="file" (change)="onFileSelected($event)">
+    </div>
+      <button type="submit" class="btn btn-primary mt-4" (click)="onUpload()">Subir</button>
+  </form>
+</section>
+
+</ng-container>
+
+<!-- Cuando se carga el modelo -->
+<ng-template #modeloCargado>
+  <p>canvas</p>
+  <canvas></canvas>
+  <!-- Botón de volver a subir-->
+  <div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-primary mt-4" (click)="resetUpload()">Volver a subir</button>
+  </div>
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 mb-4">
+        <img src="./../../../assets/spiderman.jpg" class="img-fluid" alt="Imagen 1">
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <img src="URL_DE_LA_IMAGEN" class="img-fluid" alt="Imagen 2">
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <img src="URL_DE_LA_IMAGEN" class="img-fluid" alt="Imagen 2">
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <img src="URL_DE_LA_IMAGEN" class="img-fluid" alt="Imagen 2">
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <img src="URL_DE_LA_IMAGEN" class="img-fluid" alt="Imagen 2">
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <img src="URL_DE_LA_IMAGEN" class="img-fluid" alt="Imagen 2">
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <img src="URL_DE_LA_IMAGEN" class="img-fluid" alt="Imagen 2">
+      </div>
+      <!-- Agrega más columnas según sea necesario para tus imágenes -->
+    </div>
+  </div>
+</ng-template>
