@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, ElementRef, HostListener, OnChanges, OnInit, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { EngineService } from 'src/app/services/motor.service';
 
 @Component({
@@ -7,8 +8,12 @@ import { EngineService } from 'src/app/services/motor.service';
   styleUrls: ['./principal.component.css']
 })
 export class PrincipalComponent implements OnInit {
-  constructor( private engServ: EngineService, private renderer: Renderer2) { }
+  constructor( private engServ: EngineService, private renderer: Renderer2, private fb: FormBuilder) { }
   private scrollPosition: number = 0;
+
+  form = this.fb.group({
+    file: [null]
+  });
 
   @ViewChild('rendererCanvas', {static: true})
   public rendererCanvasRef!: ElementRef<HTMLDivElement>;
@@ -23,6 +28,18 @@ export class PrincipalComponent implements OnInit {
     if (event.target.files && event.target.files[0]) {
       const file: File = event.target.files[0];
       this.fileUploaded = file;
+    }
+  }
+
+  onUpload(){
+    this.closeModal2();
+    if (this.fileUploaded) {
+      // Verificar si el archivo es un archivo GLTF
+      if (this.fileUploaded.type === 'model/gltf+json' || this.fileUploaded.name.endsWith('.gltf') || this.fileUploaded.name.endsWith('.glb')) {
+        this.engServ.cargarCoche(this.fileUploaded);
+      } else {
+        console.error('Invalid file format. Please select a GLTF file.');
+      }
     }
   }
 
@@ -54,12 +71,6 @@ export class PrincipalComponent implements OnInit {
     this.engServ.animate();
   }
 
-  onUpload(){
-    this.closeModal2();
-    console.log(this.fileUploaded);
-    // this.engServ.CrearGaleria();
-    console.log(this.engServ.CrearGaleria());
-  }
 
   resetUpload() {
     this.fileUploaded = new File([], '');

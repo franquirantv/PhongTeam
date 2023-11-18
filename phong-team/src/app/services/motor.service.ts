@@ -29,7 +29,7 @@ let numCamaras = 5;
 })
 
 export class EngineService {
-public coche = "./../../../assets/coches/Audi2.gltf";
+public coche = "";
 
   constructor(private ngZone: NgZone
               // public explo: ExplorarComponent
@@ -101,24 +101,42 @@ public coche = "./../../../assets/coches/Audi2.gltf";
     directionalLight.position.set(1, 1, 0); // La posición de la luz direccional
     scene.add(directionalLight);
 
-    this.CargarCoche();
+    // this.CargarCoche();
 
   }
 
 
 
 
-public CargarCoche() {
+public cargarCoche(file: File) {
 
   const loader = new GLTFLoader();
   // console.log("MESH",mesh)
   let escenacoche;
-  loader.load(this.coche , ( gltf ) => {
-      escenacoche=gltf.scene;
-      scene.add( escenacoche );
-      escenacoche.scale.set( 25, 25, 25 ); //TAMAÑO COCHE
+  const reader = new FileReader();
 
-  });
+
+  reader.onload = (data) => {
+    const content = data.target?.result;
+
+    if (content) {
+      const gltfContent = JSON.parse(content as string);
+
+      // Cargar el modelo GLTF
+      loader.parse(gltfContent, '', (gltf) => {
+        console.log(gltf);
+        escenacoche=gltf.scene;
+        scene.add(escenacoche);
+        escenacoche.scale.set( 25, 25, 25 ); //TAMAÑO COCHE
+      });
+    }
+  };
+
+  reader.readAsText(file);
+  // loader.load(ruta , ( gltf ) => {
+  //     scene.add( escenacoche );
+
+  // });
 
 }
 
@@ -136,8 +154,8 @@ public CrearGaleria(){
     renderer.render(scene, camara1);
     renderer.setRenderTarget(null);
 
-    console.log(renderTarget);
-    console.log(renderTarget.texture.image.src);
+    // console.log(renderTarget);
+    // console.log(renderTarget.texture.image.src);
 
     // Creamos un elemento de lienzo donde copiamos el renderTarget
     const canvas = document.createElement('canvas');
