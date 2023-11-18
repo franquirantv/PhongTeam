@@ -1,1 +1,15 @@
-<p>principal works!</p>
+<!-- Antes de cargar el modelo -->
+<ng-container *ngIf="true else modeloCargado">
+<section class="container d-flex justify-content-center min-height align-items-center">
+  <form class="p-4">
+    <h2>Selecciona un modelo para continuar</h2>
+    <input name="upload" type="file" (change)="onFileSelected($event)">
+  </form>
+</section>
+
+</ng-container>
+
+<!-- Cuando se carga el modelo -->
+<ng-template #modeloCargado>
+  <canvas></canvas>
+</ng-template>
