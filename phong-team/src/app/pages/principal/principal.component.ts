@@ -13,6 +13,7 @@ export class PrincipalComponent {
   public rendererCanvasRef!: ElementRef<HTMLDivElement>;
 
   fileUploaded: File = new File([], '');
+  fileRecieved: boolean = false;
 
   onFileSelected(event: any) {
     if (event.target.files && event.target.files[0]) {
@@ -22,8 +23,20 @@ export class PrincipalComponent {
   }
 
   ngOnInit(): void {
+  }
+
+  onUpload(){
+    this.fileRecieved = true;
+    console.log(this.fileUploaded);
     this.engServ.createScene(this.rendererCanvasRef);
     this.engServ.animate();
   }
+
+  resetUpload() {
+    this.fileUploaded = new File([], '');
+    this.fileRecieved = false;
+
+  }
+
 
 }

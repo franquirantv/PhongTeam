@@ -32,6 +32,7 @@ public coche = ""
 
   public createScene(canvas: ElementRef<HTMLDivElement>): void {
     //// console.log("MESH",mesh);
+    console.log(canvas)
    let canv = canvas.nativeElement;
     //// console.log("CANVASSS",canv);
     renderer = new THREE.WebGLRenderer( {antialias: true } );
