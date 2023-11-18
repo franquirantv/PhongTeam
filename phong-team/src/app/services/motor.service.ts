@@ -13,6 +13,12 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 let renderer: THREE.WebGLRenderer, scene: THREE.Object3D, camera: THREE.Camera, stats;
 let mesh;
 let coche = "C:\Users\amban\PhongTeam\phong-team\src\assets\coches\Audi.gltf";
+let camara1;
+let camara2;
+let camara3;
+let camara4;
+let camara5;
+let numCamaras = 5;
 
 
 // export function getDecals(){
@@ -51,32 +57,52 @@ public coche = "./../../../assets/coches/Audi2.gltf";
     //// console.log("STATS",stats);
     scene = new THREE.Scene();
 
-
-    if(window.innerWidth > 360 && window.innerWidth < 769 )
+    
+    if(window.innerWidth > 360 && window.innerWidth < 769 ){
       camera = new THREE.PerspectiveCamera( 45, window.innerWidth/ window.innerHeight, 1, 1000 );
-    else
+      camara1 = camera;
+      scene.add(camara1);
+      camara2 = camera;
+      scene.add(camara2);
+      camara3 = camera;
+      scene.add(camara3);
+      camara4 = camera;
+      scene.add(camara4);
+      camara5 = camera;
+      scene.add(camara5);
+    }
+    else{
       camera = new THREE.PerspectiveCamera( 45, window.innerWidth*0.85/ window.innerHeight, 1, 1000 );
-    camera.position.z = 180;
-    camera.position.y = 30;
-
+      camera.position.z = 180;
+      camera.position.y = 30;
+      camara1 = camera;
+      scene.add(camara1);
+      camara2 = camera;
+      scene.add(camara2);
+      camara3 = camera;
+      scene.add(camara3);
+      camara4 = camera;
+      scene.add(camara4);
+      camara5 = camera;
+      scene.add(camara5);
+    }
     const controls = new OrbitControls( camera, renderer.domElement );
 
 
     scene.add( new THREE.AmbientLight( 0x443333,2) );
 
-    const dirLight1 = new THREE.DirectionalLight( 0xffddcc, 0.35 );
-    dirLight1.position.set( 1, 0.75, 0.5 );
-    scene.add( dirLight1 );
+    
 
-    const dirLight2 = new THREE.DirectionalLight( 0xccccff,  0.35);
-    dirLight2.position.set( - 1, 0.75, - 0.5 );
-    scene.add( dirLight2 );
+    var ambientLight = new THREE.AmbientLight(0xffffff, 1); // El segundo parámetro es la intensidad
+    scene.add(ambientLight);
 
-    // scene.add( line );
-
-   // this. escena();
-   // console.log("COLOR:", this.colorear);
+    // Crear una luz direccional (simula la luz del sol)
+    var directionalLight = new THREE.DirectionalLight(0xffffff, 1); // El segundo parámetro es la intensidad
+    directionalLight.position.set(1, 1, 0); // La posición de la luz direccional
+    scene.add(directionalLight);
+    
     this.CargarCoche();
+
   }
 
 
@@ -85,68 +111,76 @@ public coche = "./../../../assets/coches/Audi2.gltf";
 public CargarCoche() {
 
   const loader = new GLTFLoader();
-  // console.log("MESH",mesh);
-
-  console.log("MESIIIIII1",this.coche);
-  let escenarecibida;
+  // console.log("MESH",mesh)
+  let escenacoche;
   loader.load(this.coche , ( gltf ) => {
-    console.log("MESIIIIII1",gltf.scene.children[ 0 ]);
-      //  mesh = gltf.scene;
-       escenarecibida = new THREE.Mesh();
+      escenacoche=gltf.scene;
+      scene.add( escenacoche );
+      escenacoche.scale.set( 25, 25, 25 ); //TAMAÑO COCHE
 
-       escenarecibida=gltf.scene;
-
-      // mesh = gltf;
-      //  mesh.material = new THREE.MeshPhongMaterial( {
-        //  specular: 0x111111,
-        //  color: obj.colorear,
-         // map: textureLoader.load( './assets/humano/human_male_albedo.png' ),
-         // map: textureLoader.load( './assets/painball/Map-COL.jpg' ),
-         // specularMap: textureLoader.load( './assets/humano/human_male_bump.png' ),
-         //  normalMap: textureLoader.load( './assets/humano/human_male_frecklemask.png' ),
-         //  normalMap: textureLoader.load( './assets/humano/model.png' ),
-        //  shininess: 25
-      //  } );
-      //  mesh.transparent = 0.5;
-      // // console.log("MESIIIIII2",scene);
-
-       scene.add( escenarecibida );
-       //// console.log("MESIIIIII3",scene);
-      //  escenarecibida.scale.set( 60, 60, 60 ); //CUERPO
-      //  mesh.position.y= -65;//CUERPO
-      escenarecibida.scale.set( 25, 25, 25 ); //CABEZA
-       // mesh.position.y=-5;
-
-
-     });
+  });
 
 }
 
+public CrearGaleria(){
+  let image = new Image();
+
+  let imagenes = [];
+
+  for(let i=0; i < numCamaras; i++){
+    // Creamos el WebGLRenderTarget
+    const renderTarget = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight);
+      
+    // Renderizamos la escena en el objeto de textura
+    renderer.setRenderTarget(renderTarget);
+    renderer.render(scene, camera);
+    renderer.setRenderTarget(null);
+    
+    // Creamos un elemento de lienzo donde copiamos el renderTarget
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+
+    // Copiar el contenido del renderTarget al lienzo
+    if (context) {
+      context.canvas.width = renderTarget.width; // asignamos el ancho del canvas al lienzo
+      context.canvas.height = renderTarget.height; // asignamos el alto del canvas al lienzo
+      context.drawImage(renderTarget.texture.image, 0, 0);
+      
+      // Obtener la URL de datos
+      const dataURL = canvas.toDataURL("image/png");
+      console.log(dataURL);
+
+      // Puedes usar dataURL como desees, por ejemplo, asignarlo a la fuente de una imagen
+    
+      image.src = dataURL;
+
+      imagenes.push(image.src);
+    }
+  }
+  return image.src;
+}
 
 
-  public animate() {
-    this.ngZone.runOutsideAngular(() => {
-      if (document.readyState !== 'loading') {
+public animate() {
+  this.ngZone.runOutsideAngular(() => {
+    if (document.readyState !== 'loading') {
+      this.render();
+    } else {
+      window.addEventListener('DOMContentLoaded', () => {
         this.render();
-      } else {
-        window.addEventListener('DOMContentLoaded', () => {
-          this.render();
-        });
-      }
-    });
+      });
+    }
+  });
+}
 
-
-  }
-
-  public conta = 0;
-  public render(): void {
-    let frameId = requestAnimationFrame(() => {
-      this.animate();
-    });
-
-    renderer.render( scene, camera );
-
-  }
+public render(): void {
+  let frameId = requestAnimationFrame(() => {
+    this.animate();
+  });
+  
+  renderer.render( scene, camera );
+  
+}
 
 
 
