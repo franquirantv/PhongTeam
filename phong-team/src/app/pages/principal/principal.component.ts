@@ -37,6 +37,8 @@ export class PrincipalComponent implements OnInit {
       // Verificar si el archivo es un archivo GLTF
       if (this.fileUploaded.type === 'model/gltf+json' || this.fileUploaded.name.endsWith('.gltf') || this.fileUploaded.name.endsWith('.glb')) {
         this.engServ.cargarCoche(this.fileUploaded);
+        this.engServ.captureScreenshots();
+        console.log(this.engServ.captureScreenshots());
       } else {
         console.error('Invalid file format. Please select a GLTF file.');
       }
