@@ -1,8 +1,79 @@
 .min-height {
-  min-height: calc(100vh - 56px);
+    min-height: calc(100vh - 56px);
 }
 
 .form-border {
-  border: 1px solid #ccc;
-  border-radius: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+/*-------------------------*/
+
+.image-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    width: calc(100% - 24px);
+    margin: 12px;
+}
+
+.image-item {
+    width: calc(100% - 12px);
+    padding-bottom: calc(18% - 3px);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.image-item:hover {
+    transform: scale(1.05);
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* Estilos del modal */
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow: auto;
+}
+
+.modal-content {
+    position: relative;
+    text-align: center;
+    max-width: 75vw;
+    max-height: 400px;
+    margin: auto;
+}
+
+.modal img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
 }

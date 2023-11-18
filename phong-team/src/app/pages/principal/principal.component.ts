@@ -37,5 +37,33 @@ export class PrincipalComponent implements OnInit {
     this.fileRecieved = false;
   }
 
+  //IMAGENES///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  images = [
+    './../../../assets/spiderman.jpg',
+    './../../../assets/spiderman.jpg',
+    './../../../assets/spiderman.jpg',
+    './../../../assets/spiderman.jpg',
+    './../../../assets/spiderman.jpg',
+    './../../../assets/spiderman.jpg',
+    './../../../assets/spiderman.jpg',
+    './../../../assets/spiderman.jpg',
+    './../../../assets/spiderman.jpg',
+    './../../../assets/spiderman.jpg',
+    './../../../assets/spiderman.jpg',
+    // ... más imágenes
+  ];
+
+  selectedImage: string | null = null;
+
+  openModal(image: string) {
+    this.selectedImage = image;
+  }
+
+  closeModal() {
+    this.selectedImage = null;
+  }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 }
