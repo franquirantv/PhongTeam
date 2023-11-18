@@ -1,0 +1,38 @@
+.max-logo {
+    max-height: 83px;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+
+/* Reducir el tamaño del logo en pantallas pequeñas */
+
+@media screen and (max-width: 600px) {
+    .max-logo {
+        max-height: 50px;
+    }
+}
+
+.custom-navbar {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  position: absolute;
+  z-index: 99999;
+  background-color: white;
+  width: 100%;
+  top: 0;
+  gap: 32px;
+}
+
+.navbar-brand,
+.nav-link {
+    text-decoration: none;
+    color: #000;
+    margin-right: 20px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}

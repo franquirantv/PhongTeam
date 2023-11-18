@@ -1,12 +1,12 @@
 <div *ngIf="showModal" class="modal-overlay">
   <div class="modal-container">
-    <div class="modal-content">
+    <div class="modal-content2">
       <section class="container d-flex justify-content-center align-items-center">
         <form class="p-4 d-flex flex-column ">
-          <h2>Sube aquí tu modelo</h2>
+          <h2 class="mb-4">¡Crea tu propio anuncio!</h2>
           <div class="form-group">
             <label for="copy">Frase publicitaria</label><small class="text-muted"> (opcional)</small>
-            <input type="text" name="copy" id="copy-phrase" class="form-control mb-4">
+            <input type="text" name="copy" id="copy" class="form-control mb-4">
           </div>
           <div class="form-group d-flex flex-column">
             <input name="upload" type="file" (change)="onFileSelected($event)">
@@ -19,35 +19,28 @@
 </div>
 
 <!-- Cuando se carga el modelo -->
+
+<section class="container mt-103">
+
 <div class="d-flex justify-content-center" #rendererCanvas></div>
 
 <!-- Botón de volver a subir-->
-  <div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center">
     <button type="button" class="btn btn-primary mt-4" (click)="resetUpload()">Volver a subir</button>
-  </div>
-  <div class="container mt-4">
-    <div class="row">
-      <div class="col-lg-4 col-md-6 mb-4">
-        <img src="./../../../assets/spiderman.jpg" class="img-fluid" alt="Imagen 1">
-      </div>
-      <div class="col-lg-4 col-md-6 mb-4">
-        <img src="URL_DE_LA_IMAGEN" class="img-fluid" alt="Imagen 2">
-      </div>
-      <div class="col-lg-4 col-md-6 mb-4">
-        <img src="URL_DE_LA_IMAGEN" class="img-fluid" alt="Imagen 2">
-      </div>
-      <div class="col-lg-4 col-md-6 mb-4">
-        <img src="URL_DE_LA_IMAGEN" class="img-fluid" alt="Imagen 2">
-      </div>
-      <div class="col-lg-4 col-md-6 mb-4">
-        <img src="URL_DE_LA_IMAGEN" class="img-fluid" alt="Imagen 2">
-      </div>
-      <div class="col-lg-4 col-md-6 mb-4">
-        <img src="URL_DE_LA_IMAGEN" class="img-fluid" alt="Imagen 2">
-      </div>
-      <div class="col-lg-4 col-md-6 mb-4">
-        <img src="URL_DE_LA_IMAGEN" class="img-fluid" alt="Imagen 2">
-      </div>
-      <!-- Agrega más columnas según sea necesario para tus imágenes -->
+</div>
+
+
+<div class="image-container">
+    <div *ngFor="let image of images" class="image-item" (click)="openModal(image)">
+        <img [src]="image" alt="Imagen">
     </div>
-  </div>
+</div>
+
+<div *ngIf="selectedImage" class="modal">
+    <div class="modal-content">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <img [src]="selectedImage" alt="Imagen">
+    </div>
+</div>
+
+</section>

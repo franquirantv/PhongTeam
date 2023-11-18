@@ -48,7 +48,7 @@ public coche = "./../../../assets/coches/Audi2.gltf";
      if(window.innerWidth > 360 && window.innerWidth < 769 )
       renderer.setSize( window.innerWidth, window.innerHeight );
      else
-      renderer.setSize( window.innerWidth*0.85, window.innerHeight*0.85 );
+      renderer.setSize( window.innerWidth*0.75, window.innerHeight*0.75 );
 
     // stats = Stats();
     //// console.log("STATS",stats);
@@ -72,7 +72,7 @@ public coche = "./../../../assets/coches/Audi2.gltf";
       scene.add(camara5);
     }
     else{
-      camera = new THREE.PerspectiveCamera( 45, window.innerWidth*0.85/ window.innerHeight, 1, 1000 );
+      camera = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 );
       camera.position.z = 180;
       camera.position.y = 30;
       camara1 = camera;

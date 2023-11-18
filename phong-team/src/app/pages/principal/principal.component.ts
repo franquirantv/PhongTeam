@@ -28,12 +28,12 @@ export class PrincipalComponent implements OnInit {
 
   showModal: boolean = true;
 
-  openModal() {
+  openModal2() {
     this.showModal = true;
     this.removeScroll();
   }
 
-  closeModal() {
+  closeModal2() {
     this.showModal = false;
     this.renderer.removeStyle(document.body, 'overflow');
     this.renderer.removeStyle(document.body, 'position');
@@ -55,7 +55,7 @@ export class PrincipalComponent implements OnInit {
   }
 
   onUpload(){
-    this.closeModal();
+    this.closeModal2();
     console.log(this.fileUploaded);
     // this.engServ.CrearGaleria();
     console.log(this.engServ.CrearGaleria());
@@ -63,7 +63,33 @@ export class PrincipalComponent implements OnInit {
 
   resetUpload() {
     this.fileUploaded = new File([], '');
-    this.openModal();
+    this.openModal2();
+  }
+
+  //IMAGENES///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  images = [
+    './../../../assets/spiderman.jpg',
+    './../../../assets/spiderman.jpg',
+    './../../../assets/spiderman.jpg',
+    './../../../assets/spiderman.jpg',
+    './../../../assets/spiderman.jpg',
+    './../../../assets/spiderman.jpg',
+    './../../../assets/spiderman.jpg',
+    './../../../assets/spiderman.jpg',
+    './../../../assets/spiderman.jpg',
+    './../../../assets/spiderman.jpg',
+    './../../../assets/spiderman.jpg',
+    // ... más imágenes
+  ];
+
+  selectedImage: string | null = null;
+
+  openModal(image: string) {
+    this.selectedImage = image;
+  }
+
+  closeModal() {
+    this.selectedImage = null;
   }
 
 
