@@ -42,7 +42,7 @@ public coche = "./../../../assets/coches/Audi2.gltf";
      if(window.innerWidth > 360 && window.innerWidth < 769 )
       renderer.setSize( window.innerWidth, window.innerHeight );
      else
-      renderer.setSize( window.innerWidth*0.989, window.innerHeight-1 );
+      renderer.setSize( window.innerWidth*0.85, window.innerHeight*0.85 );
 
     // stats = Stats();
     //// console.log("STATS",stats);
@@ -55,7 +55,7 @@ public coche = "./../../../assets/coches/Audi2.gltf";
     if(window.innerWidth > 360 && window.innerWidth < 769 )
       camera = new THREE.PerspectiveCamera( 45, window.innerWidth/ window.innerHeight, 1, 1000 );
     else
-      camera = new THREE.PerspectiveCamera( 45, window.innerWidth*0.5/ window.innerHeight, 1, 1000 );
+      camera = new THREE.PerspectiveCamera( 45, window.innerWidth*0.85/ window.innerHeight, 1, 1000 );
     camera.position.z = 180;
     camera.position.y = 30;
 
@@ -112,9 +112,9 @@ public CargarCoche() {
 
        scene.add( escenarecibida );
        //// console.log("MESIIIIII3",scene);
-       escenarecibida.scale.set( 60, 60, 60 ); //CUERPO
+      //  escenarecibida.scale.set( 60, 60, 60 ); //CUERPO
       //  mesh.position.y= -65;//CUERPO
-      // escenarecibida.scale.set( 10, 10, 10 ); //CABEZA
+      escenarecibida.scale.set( 25, 25, 25 ); //CABEZA
        // mesh.position.y=-5;
 
 
