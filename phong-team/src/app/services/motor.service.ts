@@ -15,7 +15,7 @@ let mesh;
 let canv: { appendChild: (arg0: HTMLCanvasElement) => void; };
 
 
- 
+
 // export function getDecals(){
 //   return decals;
 // }
@@ -24,7 +24,7 @@ let canv: { appendChild: (arg0: HTMLCanvasElement) => void; };
 })
 
 export class EngineService {
- 
+
 
   constructor(private ngZone: NgZone
               // public explo: ExplorarComponent
@@ -50,7 +50,7 @@ export class EngineService {
     canv.appendChild( renderer.domElement);
     //// console.log("STATS",stats);
     scene = new THREE.Scene();
-    
+
 
     if(window.innerWidth > 360 && window.innerWidth < 769 )
       camera = new THREE.PerspectiveCamera( 45, window.innerWidth/ window.innerHeight, 1, 1000 );
@@ -60,7 +60,7 @@ export class EngineService {
     camera.position.y = 30;
 
     const controls = new OrbitControls( camera, renderer.domElement );
-  
+
 
     scene.add( new THREE.AmbientLight( 0x443333,2) );
 
@@ -77,9 +77,9 @@ export class EngineService {
    // this. escena();
    // console.log("COLOR:", this.colorear);
     this.loadLeePerrySmith();
-   
+  }
 
-
+personaje:any;
 
 
 public loadLeePerrySmith() {
@@ -99,7 +99,7 @@ public loadLeePerrySmith() {
       //  normalMap: textureLoader.load( './assets/humano/model.png' ),
       shininess: 25
     });
-    
+
     // // console.log("MESIIIIII2",scene);
 
     scene.add( mesh );
@@ -112,7 +112,7 @@ public loadLeePerrySmith() {
 
 }
 
-  
+
 
   public animate() {
     this.ngZone.runOutsideAngular(() => {
@@ -133,11 +133,11 @@ public loadLeePerrySmith() {
     let frameId = requestAnimationFrame(() => {
       this.animate();
     });
-   
+
     renderer.render( scene, camera );
 
   }
 
- 
+
 
 }
