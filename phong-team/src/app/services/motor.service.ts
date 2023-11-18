@@ -10,7 +10,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 //   /* proporciona otras instancias de servicios y dependencias necesarias */
 // );
 
-let renderer: THREE.WebGLRenderer, scene: THREE.Object3D<THREE.Event>, camera: THREE.Camera, stats;
+let renderer: THREE.WebGLRenderer, scene: THREE.Object3D, camera: THREE.Camera, stats;
 let mesh;
 let canv: { appendChild: (arg0: HTMLCanvasElement) => void; };
 
@@ -89,16 +89,16 @@ public loadLeePerrySmith() {
 
   loader.load(this.personaje , function ( gltf ){
     mesh = gltf.scene.children[ 0 ];
-    mesh.material = new THREE.MeshPhongMaterial({
-      specular: 0x111111,
-      color: obj.colorear,
+    // mesh.material = new THREE.MeshPhongMaterial({
+      // specular: 0x111111,
+      // color: obj.colorear,
       // map: textureLoader.load( './assets/humano/human_male_albedo.png' ),
       // map: textureLoader.load( './assets/painball/Map-COL.jpg' ),
       // specularMap: textureLoader.load( './assets/humano/human_male_bump.png' ),
       //  normalMap: textureLoader.load( './assets/humano/human_male_frecklemask.png' ),
       //  normalMap: textureLoader.load( './assets/humano/model.png' ),
-      shininess: 25
-    });
+      // shininess: 25
+    // });
 
     // // console.log("MESIIIIII2",scene);
 
