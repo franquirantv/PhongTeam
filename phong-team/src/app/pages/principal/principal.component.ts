@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { EngineService } from 'src/app/services/motor.service';
 
 @Component({
@@ -6,10 +6,10 @@ import { EngineService } from 'src/app/services/motor.service';
   templateUrl: './principal.component.html',
   styleUrls: ['./principal.component.css']
 })
-export class PrincipalComponent {
+export class PrincipalComponent implements OnInit {
   constructor( private engServ: EngineService) { }
 
-  @ViewChild('motor', {static: true})
+  @ViewChild('rendererCanvas', {static: true})
   public rendererCanvasRef!: ElementRef<HTMLDivElement>;
 
   fileUploaded: File = new File([], '');
@@ -23,13 +23,13 @@ export class PrincipalComponent {
   }
 
   ngOnInit(): void {
+    this.engServ.createScene(this.rendererCanvasRef);
+    this.engServ.animate();
   }
 
   onUpload(){
     this.fileRecieved = true;
     console.log(this.fileUploaded);
-    this.engServ.createScene(this.rendererCanvasRef);
-    this.engServ.animate();
   }
 
   resetUpload() {

@@ -23,7 +23,7 @@ let coche = "C:\Users\amban\PhongTeam\phong-team\src\assets\coches\Audi.gltf";
 })
 
 export class EngineService {
-public coche = ""
+public coche = "./../../../assets/coches/Audi.gltf";
 
   constructor(private ngZone: NgZone
               // public explo: ExplorarComponent
@@ -87,16 +87,32 @@ public CargarCoche() {
   const loader = new GLTFLoader();
   // console.log("MESH",mesh);
 
-  loader.load(
-    this.coche,
-    (gltf) => {
-      scene.add(gltf.scene);
-    },
-    undefined,
-    (error) => {
-      console.error('Error loading GLTF model', error);
-    }
-  );
+  loader.load(this.coche , function ( gltf ) {
+    //// console.log("MESIIIIII1",gltf.scene.children[ 0 ]);
+       mesh = gltf.scene.children[ 0 ];
+      // mesh = gltf;
+      //  mesh.material = new THREE.MeshPhongMaterial( {
+        //  specular: 0x111111,
+        //  color: obj.colorear,
+         // map: textureLoader.load( './assets/humano/human_male_albedo.png' ),
+         // map: textureLoader.load( './assets/painball/Map-COL.jpg' ),
+         // specularMap: textureLoader.load( './assets/humano/human_male_bump.png' ),
+         //  normalMap: textureLoader.load( './assets/humano/human_male_frecklemask.png' ),
+         //  normalMap: textureLoader.load( './assets/humano/model.png' ),
+        //  shininess: 25
+      //  } );
+      //  mesh.transparent = 0.5;
+      // // console.log("MESIIIIII2",scene);
+
+       scene.add( mesh );
+       //// console.log("MESIIIIII3",scene);
+       mesh.scale.set( 60, 60, 60 ); //CUERPO
+       mesh.position.y= -65;//CUERPO
+       // mesh.scale.set( 10, 10, 10 ); //CABEZA
+       // mesh.position.y=-5;
+
+
+     } );
 
 }
 
