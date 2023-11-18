@@ -41,3 +41,5 @@ testem.log
 .DS_Store
 Thumbs.db
 /src/assets/coches/Audi.gltf
+/src/assets/coches/Audi2.gltf
+/src/assets/coches/Escenatoda.gltf

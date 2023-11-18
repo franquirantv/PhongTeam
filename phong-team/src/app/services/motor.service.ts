@@ -23,7 +23,7 @@ let coche = "C:\Users\amban\PhongTeam\phong-team\src\assets\coches\Audi.gltf";
 })
 
 export class EngineService {
-public coche = ""
+public coche = "./../../../assets/coches/Audi2.gltf";
 
   constructor(private ngZone: NgZone
               // public explo: ExplorarComponent
@@ -42,7 +42,7 @@ public coche = ""
      if(window.innerWidth > 360 && window.innerWidth < 769 )
       renderer.setSize( window.innerWidth, window.innerHeight );
      else
-      renderer.setSize( window.innerWidth*0.5, window.innerHeight-1 );
+      renderer.setSize( window.innerWidth*0.85, window.innerHeight*0.85 );
 
     // stats = Stats();
     //// console.log("STATS",stats);
@@ -55,7 +55,7 @@ public coche = ""
     if(window.innerWidth > 360 && window.innerWidth < 769 )
       camera = new THREE.PerspectiveCamera( 45, window.innerWidth/ window.innerHeight, 1, 1000 );
     else
-      camera = new THREE.PerspectiveCamera( 45, window.innerWidth*0.5/ window.innerHeight, 1, 1000 );
+      camera = new THREE.PerspectiveCamera( 45, window.innerWidth*0.85/ window.innerHeight, 1, 1000 );
     camera.position.z = 180;
     camera.position.y = 30;
 
@@ -87,16 +87,38 @@ public CargarCoche() {
   const loader = new GLTFLoader();
   // console.log("MESH",mesh);
 
-  loader.load(
-    this.coche,
-    (gltf) => {
-      scene.add(gltf.scene);
-    },
-    undefined,
-    (error) => {
-      console.error('Error loading GLTF model', error);
-    }
-  );
+  console.log("MESIIIIII1",this.coche);
+  let escenarecibida;
+  loader.load(this.coche , ( gltf ) => {
+    console.log("MESIIIIII1",gltf.scene.children[ 0 ]);
+      //  mesh = gltf.scene;
+       escenarecibida = new THREE.Mesh();
+
+       escenarecibida=gltf.scene;
+
+      // mesh = gltf;
+      //  mesh.material = new THREE.MeshPhongMaterial( {
+        //  specular: 0x111111,
+        //  color: obj.colorear,
+         // map: textureLoader.load( './assets/humano/human_male_albedo.png' ),
+         // map: textureLoader.load( './assets/painball/Map-COL.jpg' ),
+         // specularMap: textureLoader.load( './assets/humano/human_male_bump.png' ),
+         //  normalMap: textureLoader.load( './assets/humano/human_male_frecklemask.png' ),
+         //  normalMap: textureLoader.load( './assets/humano/model.png' ),
+        //  shininess: 25
+      //  } );
+      //  mesh.transparent = 0.5;
+      // // console.log("MESIIIIII2",scene);
+
+       scene.add( escenarecibida );
+       //// console.log("MESIIIIII3",scene);
+      //  escenarecibida.scale.set( 60, 60, 60 ); //CUERPO
+      //  mesh.position.y= -65;//CUERPO
+      escenarecibida.scale.set( 25, 25, 25 ); //CABEZA
+       // mesh.position.y=-5;
+
+
+     });
 
 }
 
