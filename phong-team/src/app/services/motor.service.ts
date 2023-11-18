@@ -12,8 +12,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 let renderer: THREE.WebGLRenderer, scene: THREE.Object3D, camera: THREE.Camera, stats;
 let mesh;
-let canv: { appendChild: (arg0: HTMLCanvasElement) => void; };
-
+let coche = "C:\Users\amban\PhongTeam\phong-team\src\assets\coches\Audi.gltf";
 
 
 // export function getDecals(){
@@ -24,7 +23,7 @@ let canv: { appendChild: (arg0: HTMLCanvasElement) => void; };
 })
 
 export class EngineService {
-
+public coche = ""
 
   constructor(private ngZone: NgZone
               // public explo: ExplorarComponent
@@ -33,7 +32,7 @@ export class EngineService {
 
   public createScene(canvas: ElementRef<HTMLDivElement>): void {
     //// console.log("MESH",mesh);
-    canv = canvas.nativeElement;
+   let canv = canvas.nativeElement;
     //// console.log("CANVASSS",canv);
     renderer = new THREE.WebGLRenderer( {antialias: true } );
      //// console.log("RENDERER",renderer);
@@ -76,39 +75,27 @@ export class EngineService {
 
    // this. escena();
    // console.log("COLOR:", this.colorear);
-    this.loadLeePerrySmith();
+    this.CargarCoche();
   }
 
-personaje:any;
 
 
-public loadLeePerrySmith() {
+
+public CargarCoche() {
 
   const loader = new GLTFLoader();
   // console.log("MESH",mesh);
 
-  loader.load(this.personaje , function ( gltf ){
-    mesh = gltf.scene.children[ 0 ];
-    // mesh.material = new THREE.MeshPhongMaterial({
-      // specular: 0x111111,
-      // color: obj.colorear,
-      // map: textureLoader.load( './assets/humano/human_male_albedo.png' ),
-      // map: textureLoader.load( './assets/painball/Map-COL.jpg' ),
-      // specularMap: textureLoader.load( './assets/humano/human_male_bump.png' ),
-      //  normalMap: textureLoader.load( './assets/humano/human_male_frecklemask.png' ),
-      //  normalMap: textureLoader.load( './assets/humano/model.png' ),
-      // shininess: 25
-    // });
-
-    // // console.log("MESIIIIII2",scene);
-
-    scene.add( mesh );
-    //// console.log("MESIIIIII3",scene);
-    mesh.scale.set( 60, 60, 60 ); //CUERPO
-    mesh.position.y= -65;//CUERPO
-    // mesh.scale.set( 10, 10, 10 ); //CABEZA
-    // mesh.position.y=-5;
-  });
+  loader.load(
+    this.coche,
+    (gltf) => {
+      scene.add(gltf.scene);
+    },
+    undefined,
+    (error) => {
+      console.error('Error loading GLTF model', error);
+    }
+  );
 
 }
 
