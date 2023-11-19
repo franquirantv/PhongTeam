@@ -5,7 +5,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/franquirantv/phone-team">
-    <img src="phong-team\src\assets\logoPhong.png" alt="Logo" width="83" height="83" style="background-color:white">
+    <img src="/phong-team/src/assets/logoPhong.png" alt="Logo" width="83" height="83">
   </a>
 
   <h3 align="center">AutoFrame</h3>
