@@ -68,18 +68,28 @@
 }
 
 .download-icon {
-    position: absolute;
-    top: 25%;
-    right: 0;
-    transform: translate(-50%, -50%);
-    background-color: rgb(239, 135, 70);
-    color: white;
-    padding: 5px 10px;
-    transition: all 0.3s ease;
+  position: absolute;
+  top: 25%;
+  right: 0;
+  transform: translate(-50%, -50%);
+  background-color: rgb(239, 135, 70);
+  color: white;
+  padding: 5px 10px;
+  transition: all 0.3s ease;
+  border-radius: 5px;
 }
 
 .download-icon:hover {
     background-color: rgb(205, 100, 34)
+}
+
+.btn-principal {
+  border-color: #f4623a;
+  background-color: #f4623a;
+  transition: all 0.3s ease;
+}
+.btn-principal:hover {
+  opacity: 0.8;
 }
 
 .image-item:hover {

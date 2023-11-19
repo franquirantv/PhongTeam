@@ -10,6 +10,8 @@ import { LoadingSpinnerComponent } from './commons/loading-spinner/loading-spinn
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { StoreModule } from '@ngrx/store';
 import { SharedReducer } from './store/shared/shared.reducer';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; //esto
+
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { SharedReducer } from './store/shared/shared.reducer';
     BrowserModule,
     AppRoutingModule,
     MatProgressSpinnerModule,
+    FormsModule,
+    ReactiveFormsModule,
     StoreModule.forRoot({ shared: SharedReducer }),
   ],
   providers: [],
