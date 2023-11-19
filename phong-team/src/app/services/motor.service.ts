@@ -279,6 +279,10 @@ captureScreenshot(camera: THREE.Camera, filename: string, text: string) {
   return image;
  }
 
+ captura(text: string){
+  this.imagenes.push(this.captureScreenshot(mainCamera,'screenshot6.png',text));
+ }
+
 
 
 }

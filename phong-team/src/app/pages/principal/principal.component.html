@@ -45,6 +45,7 @@
     <div class="d-flex justify-content-center gap-4">
         <button type="button" class="btn btn-primary mt-4 btn-principal" (click)="resetUpload()">Volver a subir</button>
         <button type="button" class="btn btn-primary mt-4 btn-principal" (click)="generarImagenes()">Generar Imágenes</button>
+        <button type="button" class="btn btn-primary mt-4 btn-principal" *ngIf="bcaptura" (click)="hacercaptura()">Capturar Frame Actual</button>
     </div>
 
 

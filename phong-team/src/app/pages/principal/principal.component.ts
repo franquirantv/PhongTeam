@@ -73,6 +73,7 @@ export class PrincipalComponent implements OnInit {
 
 
   showModal: boolean = true;
+  bcaptura:boolean = false;
 
   openModal2() {
     this.showModal = true;
@@ -114,7 +115,8 @@ export class PrincipalComponent implements OnInit {
 
 
   images:any = [];
-  async generarImagenes() {
+  generarImagenes() {
+    this.bcaptura = true;
     this.engServ.cargarCoche(this.fileUploaded);
 
     this.images = this.engServ.captureScreenshots(this.textoPublicitario);
@@ -122,6 +124,12 @@ export class PrincipalComponent implements OnInit {
     // this.editImage(this.images[0]);
     console.log(this.images);
   }
+
+  hacercaptura(){
+    this.engServ.captura(this.textoPublicitario);
+  }
+
+
 
   selectedImage: string | null = null;
 
