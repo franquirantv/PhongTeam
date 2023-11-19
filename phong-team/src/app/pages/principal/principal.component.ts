@@ -178,30 +178,4 @@ export class PrincipalComponent implements OnInit {
       document.body.removeChild(link);
     }
   }
-
-  // editImage(img: HTMLImageElement) {
-  //   // Lógica para agregar texto a la imagen
-  //   console.log('Imagen sin editar:', img);
-
-  //   const canvas = document.createElement('canvas');
-  //   const context = canvas.getContext('2d');
-
-  //   const width = window.innerWidth;
-  //   const height = window.innerHeight;
-
-  //   canvas.width = width;
-  //   canvas.height = height;
-
-  //   context?.drawImage(renderer.domElement, 0, 0, width, height);
-
-  //   const dataURL = canvas.toDataURL('image/png');
-  //   let image = new Image();
-  //   image.src = dataURL;
-
-  //   let editedDataURL = canvas.toDataURL();
-
-
-  //   // Puedes mostrar la imagen resultante o realizar otras acciones
-  //   console.log('Imagen editada:', editedDataURL);
-  // }
 }
