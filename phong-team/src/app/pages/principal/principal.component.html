@@ -16,65 +16,65 @@
           *ngIf="
             fileForm.get('fileName')?.hasError('required') &&
             (fileForm.get('fileName')?.touched || submitted)
-          "
-          class="error-message">
-          El archivo es obligatorio.
-          </div>
-          <div
-          *ngIf="
+          " class="error-message">
+                        El archivo es obligatorio.
+                    </div>
+                    <div *ngIf="
             fileForm.get('fileExtension')?.hasError('required') &&
             (fileForm.get('fileExtension')?.touched || submitted)
-          "
-          class="error-message">
-          El archivo no tiene el formato GLTF.
+          " class="error-message">
+                        El archivo no tiene el formato GLTF.
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-4 btn-principal" (click)="onUpload($event)">Subir</button>
+                </form>
+            </section>
         </div>
-          <button type="submit" class="btn btn-primary mt-4" (click)="onUpload($event)">Subir</button>
-        </form>
-      </section>
     </div>
-  </div>
 </div>
 
 <!-- Cuando se carga el modelo -->
 
 <section class="container mt-103">
-  <span class="overlay" *ngIf="showLoading$ | async"></span>
-  <div class="spinner" *ngIf="showLoading$ | async">
-    <app-loading-spinner></app-loading-spinner>
-  </div>
-<div class="d-flex justify-content-center" #rendererCanvas></div>
+    <span class="overlay" *ngIf="showLoading$ | async"></span>
+    <div class="spinner" *ngIf="showLoading$ | async">
+        <app-loading-spinner></app-loading-spinner>
+    </div>
+    <div class="d-flex justify-content-center" #rendererCanvas></div>
 
-<!-- Botón de volver a subir-->
-<div class="d-flex justify-content-center gap-4">
-    <button type="button" class="btn btn-primary mt-4" (click)="resetUpload()">Volver a subir</button>
-    <button type="button" class="btn btn-primary mt-4" (click)="generarImagenes()">Generar Imágenes</button>
-</div>
+    <!-- Botón de volver a subir-->
+    <div class="d-flex justify-content-center gap-4">
+        <button type="button" class="btn btn-primary mt-4 btn-principal" (click)="resetUpload()">Volver a subir</button>
+        <button type="button" class="btn btn-primary mt-4 btn-principal" (click)="generarImagenes()">Generar Imágenes</button>
+    </div>
 
 
-<div class="image-container">
-    <div *ngFor="let image of images; let i = index" class="image-item">
-        <img class="imgGaleria" [src]="image.src" (click)="openModal(image.currentSrc, i)" alt="Imagen">
-        <button class="download-icon" (click)="downloadImage(image.currentSrc)">
+    <div class="image-container">
+        <div *ngFor="let image of images; let i = index" class="image-item">
+            <img class="imgGaleria" [src]="image.src" (click)="openModal(image.currentSrc, i)" alt="Imagen">
+            <button class="download-icon" (click)="downloadImage(image.currentSrc)">
           <img height="20" width="20" src="../../../assets/icons8-descargar-64.png" alt="Descargar">
         </button>
+        </div>
     </div>
-</div>
 
-<div *ngIf="selectedImage" class="modal">
-  <div class="modal-content">
-      <div class="close-container" (click)="closeModal()">
-          <span class="close-icon" aria-hidden="true">&times;</span>
-      </div>
-      <img [src]="selectedImage" alt="Imagen">
-      <div class="">
-          <div class="arrow-container left-arrow-container" (click)="imagenIzquierda()">
-              <span class="arrow left-arrow ">&lt;</span>
-          </div>
-          <div class="arrow-container right-arrow-container" (click)="imagenDerecha()">
-              <span class="arrow right-arrow">&gt;</span>
-          </div>
-      </div>
-  </div>
-</div>
+    <div *ngIf="selectedImage" class="modal">
+        <div class="modal-content">
+            <div class="close-container" (click)="closeModal()">
+                <span class="close-icon" aria-hidden="true">&times;</span>
+            </div>
+            <div class="izq-container izquierdaboton" (click)="downloadImage(selectedImage)">
+                <img class="descarga2" src="../../../assets/icons8-descargar-64.png" alt="Descargar">
+            </div>
+            <img [src]="selectedImage" alt="Imagen">
+            <div class="">
+                <div class="arrow-container left-arrow-container" (click)="imagenIzquierda()">
+                    <span class="arrow left-arrow ">&lt;</span>
+                </div>
+                <div class="arrow-container right-arrow-container" (click)="imagenDerecha()">
+                    <span class="arrow right-arrow">&gt;</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </section>
