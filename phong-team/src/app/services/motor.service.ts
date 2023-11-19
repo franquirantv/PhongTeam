@@ -105,7 +105,7 @@ public coche = "";
       camara5.position.x = 120;
       scene.add(camara5);
     }
-    const controls = new OrbitControls( camara3, renderer.domElement );
+    const controls = new OrbitControls( camara1, renderer.domElement );
 
 
     scene.add( new THREE.AmbientLight( 0x443333,2) );
@@ -182,10 +182,10 @@ public animate() {
 public render(): void {
   let frameId = requestAnimationFrame(() => {
     this.animate();
-    console.log("POSICION:", camara3.position);
+    // console.log("POSICION:", camara3.position);
   });
 
-  renderer.render( scene, camara3 );
+  renderer.render( scene, camara1 );
 
 }
 public imagenes:any = [];
