@@ -53,7 +53,7 @@
 
 <div class="image-container">
     <div *ngFor="let image of images" class="image-item">
-        <img class="imgGaleria" [src]="image.currentSrc" (click)="openModal(image.currentSrc)" alt="Imagen">
+        <img class="imgGaleria" [src]="image.src" (click)="openModal(image.currentSrc)" alt="Imagen">
         <button class="download-icon" (click)="downloadImage(image.currentSrc)">
           <img height="20" width="20" src="../../../assets/icons8-descargar-64.png" alt="Descargar">
         </button>

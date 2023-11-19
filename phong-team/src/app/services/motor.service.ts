@@ -15,6 +15,7 @@ import { SharedState } from '../store/shared/shared.state';
 
 let renderer: THREE.WebGLRenderer, scene: THREE.Object3D, camera: THREE.Camera, stats;
 let mesh;
+let mainCamera: THREE.Camera;
 let camara1: THREE.Camera;
 let camara2: THREE.Camera;
 let camara3: THREE.Camera;
@@ -63,22 +64,43 @@ public coche = "";
 
 
     if(window.innerWidth > 360 && window.innerWidth < 769 ){
-      camera = new THREE.PerspectiveCamera( 45, window.innerWidth/ window.innerHeight, 1, 1000 );
-      camara1 = camera;
+      camara1 = new THREE.PerspectiveCamera( 45, window.innerWidth/ window.innerHeight, 1, 1000 ); //VISTA PLANTA
+      camara1.position.z = 110;
+      camara1.position.y = 30;
+      camara1.position.x = 0;
       scene.add(camara1);
-      camara2 = camera;
+      camara2 = new THREE.PerspectiveCamera( 45, window.innerWidth/ window.innerHeight, 1, 1000 ); //PARTE TRASERA
+      camara2.position.z = 110;
+      camara2.position.y = 30;
+      camara2.position.x = 0;
       scene.add(camara2);
-      camara3 = camera;
+      camara3 = new THREE.PerspectiveCamera( 45, window.innerWidth/ window.innerHeight, 1, 1000 ); //PARTE LATERAL2
+      camara3.position.z = 110;
+      camara3.position.y = 30;
+      camara3.position.x = 0;
       scene.add(camara3);
-      camara4 = camera;
+      camara4 = new THREE.PerspectiveCamera( 45, window.innerWidth/ window.innerHeight, 1, 1000 ); //PARTE DELANTERA
+      camara4.position.z = 110;
+      camara4.position.y = 30;
+      camara4.position.x = 0;
       scene.add(camara4);
-      camara5 = camera;
+      camara5 = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 ); //PARTE LATERAL 1
+      camara5.position.z = 110;
+      camara5.position.y = 30;
+      camara5.position.x = 0;
       scene.add(camara5);
+      mainCamera = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 ); //PARTE LATERAL 1
+      mainCamera.position.z = 110;
+      mainCamera.position.y = 30;
+      mainCamera.position.x = 0;
+      scene.add(mainCamera);
     }
     else{
       camara1 = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 ); //VISTA PLANTA
-      camara1.position.z = 50;
-      camara1.position.y = 240;
+      // camara1.position.z = 50;
+      camara1.position.z = 110;
+      camara1.position.y = 30;
+      camara1.position.x = 0;
       scene.add(camara1);
       camara2 = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 ); //PARTE TRASERA
       camara2.position.z = 110;
@@ -86,22 +108,27 @@ public coche = "";
       camara2.position.x = 0;
       scene.add(camara2);
       camara3 = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 ); //PARTE LATERAL2
-      camara3.position.z = 0;
+      camara3.position.z = 110;
       camara3.position.y = 30;
-      camara3.position.x = -130;
+      camara3.position.x = 0;
       scene.add(camara3);
       camara4 = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 ); //PARTE DELANTERA
-      camara4.position.z = -110;
+      camara4.position.z = 110;
       camara4.position.y = 30;
       camara4.position.x = 0;
       scene.add(camara4);
       camara5 = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 ); //PARTE LATERAL 1
-      camara5.position.z = 0;
+      camara5.position.z = 110;
       camara5.position.y = 30;
-      camara5.position.x = 120;
+      camara5.position.x = 0;
       scene.add(camara5);
+      mainCamera = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 ); //PARTE LATERAL 1
+      mainCamera.position.z = 110;
+      mainCamera.position.y = 30;
+      mainCamera.position.x = 0;
+      scene.add(mainCamera);
     }
-    const controls = new OrbitControls( camera, renderer.domElement );
+    const controls = new OrbitControls( mainCamera, renderer.domElement );
 
 
     scene.add( new THREE.AmbientLight( 0x443333,2) );
@@ -117,6 +144,7 @@ public coche = "";
     scene.add(directionalLight);
 
     // this.CargarCoche();
+
 
   }
 
@@ -178,33 +206,50 @@ public render(): void {
     this.animate();
   });
 
-  renderer.render( scene, camera );
+  renderer.render( scene, mainCamera );
+  // renderer.render( scene, camara2 );
+  // renderer.render( scene, camara3 );
+  // renderer.render( scene, camara4 );
+  // renderer.render( scene, camara5 );
 
 }
 public imagenes:any = [];
 captureScreenshots() {
   this.imagenes = [];
-  this.captureScreenshot(camara1, 'screenshot1.png');
+  // this.captureScreenshot(camara1, 'screenshot1.png');
   this.imagenes.push(this.captureScreenshot(camara1, 'screenshot1.png'));
-  this.captureScreenshot(camara2, 'screenshot2.png');
+  // this.captureScreenshot(camara2, 'screenshot2.png');
   this.imagenes.push(this.captureScreenshot(camara2, 'screenshot2.png'));
-  this.captureScreenshot(camara3, 'screenshot3.png');
+  // this.captureScreenshot(camara3, 'screenshot3.png');
   this.imagenes.push(this.captureScreenshot(camara3, 'screenshot3.png'));
-  this.captureScreenshot(camara4, 'screenshot4.png');
+  // this.captureScreenshot(camara4, 'screenshot4.png');
   this.imagenes.push(this.captureScreenshot(camara4, 'screenshot4.png'));
-  this.captureScreenshot(camara5, 'screenshot5.png');
+  // this.captureScreenshot(camara5, 'screenshot5.png');
   this.imagenes.push(this.captureScreenshot(camara5, 'screenshot5.png'));
   // Puedes seguir capturando más capturas desde otras cámaras según sea necesario.
   return this.imagenes;
 }
 
 captureScreenshot(camera: THREE.Camera, filename: string) {
-  let image = new Image();
-  renderer.render(scene, camera);
-  const canvas = renderer.domElement;
-  const dataURL = canvas.toDataURL('image/png');
+  const canvas = document.createElement('canvas');
+  const context = canvas.getContext('2d');
 
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+
+  canvas.width = width;
+  canvas.height = height;
+  renderer.render(scene, camera);
+
+  context?.drawImage(renderer.domElement, 0, 0, width, height);
+
+  const dataURL = canvas.toDataURL('image/png');
+  let image = new Image();
   image.src = dataURL;
+
+  console.log(`Screenshot captured from camera ${camera.name}:`, dataURL);
+
+
   return image;
   // Puedes utilizar dataURL, por ejemplo, para mostrar la imagen en tu aplicación o guardarla.
   console.log(`Screenshot captured from camera ${camera.name}:`, dataURL);

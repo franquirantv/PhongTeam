@@ -111,8 +111,9 @@ export class PrincipalComponent implements OnInit {
 
 
   images:any = [];
-  generarImagenes() {
+  async generarImagenes() {
     this.engServ.cargarCoche(this.fileUploaded);
+
     this.images = this.engServ.captureScreenshots();
     console.log(this.images);
   }
@@ -133,7 +134,7 @@ export class PrincipalComponent implements OnInit {
     if (url) {
       const link = document.createElement('a');
       link.href = url;
-      link.download = 'nombre_de_tu_imagen'; // Puedes establecer un nombre aquí
+      link.download = 'Banner'; // Puedes establecer un nombre aquí
       link.target = '_blank'; // Abre en una nueva ventana/tabla
       document.body.appendChild(link);
       link.click();
