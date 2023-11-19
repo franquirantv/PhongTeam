@@ -56,14 +56,14 @@ export class PrincipalComponent implements OnInit {
         if (this.fileUploaded.type === 'model/gltf+json' || this.fileUploaded.name.endsWith('.gltf') || this.fileUploaded.name.endsWith('.glb')) {
           this.engServ.cargarCoche(this.fileUploaded);
           this.closeModal2();
+
         } else {
           console.error('Invalid file format. Please select a GLTF file.');
         }
       }
     }
-
-
   }
+
 
   showModal: boolean = true;
 
@@ -99,6 +99,11 @@ export class PrincipalComponent implements OnInit {
     this.fileUploaded = new File([], '');
     this.fileForm.reset();
     this.openModal2();
+  }
+
+  generarImagenes() {
+    this.engServ.cargarCoche(this.fileUploaded);
+    console.log(this.engServ.captureScreenshots());
   }
 
   //IMAGENES///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

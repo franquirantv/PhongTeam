@@ -145,78 +145,7 @@ public cargarCoche(file: File) {
 
   // });
 
-}
 
-public CrearGaleria(){
-  let image = new Image();
-
-  let imagenes = [];
-
-  // for(let i=0; i < numCamaras; i++){
-    // Creamos el WebGLRenderTarget
-    const renderTarget = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight);
-
-    // Renderizamos la escena en el objeto de textura
-    renderer.setRenderTarget(renderTarget);
-    renderer.render(scene, camara1);
-    renderer.setRenderTarget(null);
-
-    // console.log(renderTarget);
-    // console.log(renderTarget.texture.image.src);
-
-    // Creamos un elemento de lienzo donde copiamos el renderTarget
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
-
-    // Copiar el contenido del renderTarget al lienzo
-    if (context) {
-      // Create a new THREE.TextureLoader
-      const loader = new THREE.TextureLoader();
-      // Load the texture from the render target
-      context.canvas.width = context.canvas.height = renderTarget.height; // asignamos el alto del canvas al lienzo
-
-      const image = new Image();
-      console.log(renderTarget.texture.image);
-      image.src = renderTarget.texture.image;
-
-      image.onload = () => {
-        // Draw the image onto the canvas
-        context.drawImage(image, 0, 0);
-
-        // Get the data URL
-        const dataURL = canvas.toDataURL("image/png");
-        console.log(dataURL);
-
-        // You can use dataURL as desired, for example, assign it to the source of an image
-
-        image.src = dataURL;
-
-        imagenes.push(image.src);
-      };
-
-      // Set the source of the image to the render target texture image
-      // image.src = renderTarget.texture.image.src;
-
-      //   // When the image has loaded, draw it onto the canvas
-      //   image.onload = () => {
-      //     context.drawImage(image, 0, 0);
-      //   };
-
-      // context.canvas.height = renderTarget.height; // asignamos el alto del canvas al lienzo
-      // context.drawImage(renderTarget.texture.image, 0, 0);
-
-      // // Obtener la URL de datos
-      // const dataURL = canvas.toDataURL("image/png");
-      // console.log(dataURL);
-
-      // // Puedes usar dataURL como desees, por ejemplo, asignarlo a la fuente de una imagen
-
-      // image.src = dataURL;
-
-      imagenes.push(image.src);
-    }
-  // }
-  return imagenes;
 }
 
 
@@ -239,6 +168,34 @@ public render(): void {
 
   renderer.render( scene, camera );
 
+}
+public imagenes:any = [];
+captureScreenshots() {
+  this.imagenes = [];
+  this.captureScreenshot(camara1, 'screenshot1.png');
+  this.imagenes.push(this.captureScreenshot(camara1, 'screenshot1.png'));
+  this.captureScreenshot(camara2, 'screenshot2.png');
+  this.imagenes.push(this.captureScreenshot(camara2, 'screenshot2.png'));
+  this.captureScreenshot(camara3, 'screenshot3.png');
+  this.imagenes.push(this.captureScreenshot(camara3, 'screenshot3.png'));
+  this.captureScreenshot(camara4, 'screenshot4.png');
+  this.imagenes.push(this.captureScreenshot(camara4, 'screenshot4.png'));
+  this.captureScreenshot(camara5, 'screenshot5.png');
+  this.imagenes.push(this.captureScreenshot(camara5, 'screenshot5.png'));
+  // Puedes seguir capturando más capturas desde otras cámaras según sea necesario.
+  return this.imagenes;
+}
+
+captureScreenshot(camera: THREE.Camera, filename: string) {
+  let image = new Image();
+  renderer.render(scene, camera);
+  const canvas = renderer.domElement;
+  const dataURL = canvas.toDataURL('image/png');
+
+  image.src = dataURL;
+  return image;
+  // Puedes utilizar dataURL, por ejemplo, para mostrar la imagen en tu aplicación o guardarla.
+  console.log(`Screenshot captured from camera ${camera.name}:`, dataURL);
 }
 
 
