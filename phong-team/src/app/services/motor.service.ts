@@ -65,19 +65,14 @@ public coche = "";
     if(window.innerWidth > 360 && window.innerWidth < 769 ){
       camera = new THREE.PerspectiveCamera( 45, window.innerWidth/ window.innerHeight, 1, 1000 );
       camara1 = camera;
-      camara1.name = "camara1";
       scene.add(camara1);
       camara2 = camera;
-      camara2.name = "camara2";
       scene.add(camara2);
       camara3 = camera;
-      camara3.name = "camara3";
       scene.add(camara3);
       camara4 = camera;
-      camara4.name = "camara4";
       scene.add(camara4);
       camara5 = camera;
-      camara5.name = "camara5";
       scene.add(camara5);
     }
     else{
@@ -85,19 +80,14 @@ public coche = "";
       camera.position.z = 180;
       camera.position.y = 30;
       camara1 = camera;
-      camara1.name = "camara1";
       scene.add(camara1);
       camara2 = camera;
-      camara2.name = "camara2";
       scene.add(camara2);
       camara3 = camera;
-      camara3.name = "camara3";
       scene.add(camara3);
       camara4 = camera;
-      camara4.name = "camara4";
       scene.add(camara4);
       camara5 = camera;
-      camara5.name = "camara5";
       scene.add(camara5);
     }
     const controls = new OrbitControls( camera, renderer.domElement );
@@ -143,6 +133,7 @@ public cargarCoche(file: File) {
         this.store.dispatch(setLoadingSpinnerForDetails({ status: false }));
         console.log(gltf);
         this.escenacoche=gltf.scene;
+
         scene.add(this.escenacoche);
         this.escenacoche.scale.set( 25, 25, 25 ); //TAMAÑO COCHE
       });
@@ -182,15 +173,15 @@ public render(): void {
 public imagenes:any = [];
 captureScreenshots() {
   this.imagenes = [];
-  // this.captureScreenshot(camara1, 'screenshot1.png');
+  this.captureScreenshot(camara1, 'screenshot1.png');
   this.imagenes.push(this.captureScreenshot(camara1, 'screenshot1.png'));
-  // this.captureScreenshot(camara2, 'screenshot2.png');
+  this.captureScreenshot(camara2, 'screenshot2.png');
   this.imagenes.push(this.captureScreenshot(camara2, 'screenshot2.png'));
-  // this.captureScreenshot(camara3, 'screenshot3.png');
+  this.captureScreenshot(camara3, 'screenshot3.png');
   this.imagenes.push(this.captureScreenshot(camara3, 'screenshot3.png'));
-  // this.captureScreenshot(camara4, 'screenshot4.png');
+  this.captureScreenshot(camara4, 'screenshot4.png');
   this.imagenes.push(this.captureScreenshot(camara4, 'screenshot4.png'));
-  // this.captureScreenshot(camara5, 'screenshot5.png');
+  this.captureScreenshot(camara5, 'screenshot5.png');
   this.imagenes.push(this.captureScreenshot(camara5, 'screenshot5.png'));
   // Puedes seguir capturando más capturas desde otras cámaras según sea necesario.
   return this.imagenes;
@@ -202,8 +193,6 @@ captureScreenshot(camera: THREE.Camera, filename: string) {
   const canvas = renderer.domElement;
   const dataURL = canvas.toDataURL('image/png');
 
-  this.escenacoche.rotateX(this.angulo1);
-  console.log(camera.name);
   // switch (camera.name) {
   //   case value:
 
