@@ -176,6 +176,18 @@ export class PrincipalComponent implements OnInit {
     }
   }
 
+  downloadImage2(){
+    if (this.selectedImage) {
+      const link = document.createElement('a');
+      link.href = this.selectedImage;
+      link.download = 'Banner'; // Puedes establecer un nombre aquí
+      link.target = '_blank'; // Abre en una nueva ventana/tabla
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  }
+
   editImage(imageUrl: string) {
     // Lógica para agregar texto a la imagen
     const img = new Image();
