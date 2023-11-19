@@ -24,7 +24,8 @@ export class PrincipalComponent implements OnInit {
   showLoading$: Observable<boolean> | undefined;
 
   fileForm = this.fb.group({
-    fileName: ['', Validators.required]
+    fileName: ['', Validators.required],
+    fileExtension: ['']
   });
 
   @ViewChild('rendererCanvas', {static: true})
@@ -32,7 +33,7 @@ export class PrincipalComponent implements OnInit {
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
-    this.scrollPosition = window.pageYOffset;
+    this.scrollPosition = window.scrollY;
   }
   fileUploaded: File = new File([], '');
 
@@ -40,7 +41,10 @@ export class PrincipalComponent implements OnInit {
     if (event.target.files && event.target.files[0]) {
       const file: File = event.target.files[0];
       this.fileUploaded = file;
+      console.log(this.fileForm.valid);
       this.fileForm.get('fileName')?.setValue(file.name);
+      const fileExtension = file.name.split('.').pop() || null;
+      this.fileForm.get('fileExtension')?.setValue(fileExtension);
     }
   }
 

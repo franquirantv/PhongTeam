@@ -9,6 +9,7 @@
             <input type="text" name="copy" id="copy" class="form-control mb-4">
           </div>
           <div class="form-group d-flex flex-column">
+            <label for="copy">Objeto 3D<small class="text-muted"> (Formato .GLTF)</small></label>
             <input name="upload" type="file" (change)="onFileSelected($event)">
           </div>
           <div
@@ -18,6 +19,14 @@
           "
           class="error-message">
           El archivo es obligatorio.
+          </div>
+          <div
+          *ngIf="
+            fileForm.get('fileExtension')?.hasError('required') &&
+            (fileForm.get('fileExtension')?.touched || submitted)
+          "
+          class="error-message">
+          El archivo no tiene el formato GLTF.
         </div>
           <button type="submit" class="btn btn-primary mt-4" (click)="onUpload($event)">Subir</button>
         </form>
