@@ -65,71 +65,87 @@ public coche = "";
 
     if(window.innerWidth > 360 && window.innerWidth < 769 ){
       camara1 = new THREE.PerspectiveCamera( 45, window.innerWidth/ window.innerHeight, 1, 1000 ); //VISTA PLANTA
-      camara1.position.z = 110;
+      camara1.position.z = -110;
       camara1.position.y = 30;
       camara1.position.x = 0;
+      camara1.lookAt(0, 0, 0);
       scene.add(camara1);
       camara2 = new THREE.PerspectiveCamera( 45, window.innerWidth/ window.innerHeight, 1, 1000 ); //PARTE TRASERA
       camara2.position.z = 110;
       camara2.position.y = 30;
       camara2.position.x = 0;
+      camara2.lookAt(0, 0, 0);
       scene.add(camara2);
       camara3 = new THREE.PerspectiveCamera( 45, window.innerWidth/ window.innerHeight, 1, 1000 ); //PARTE LATERAL2
-      camara3.position.z = 110;
-      camara3.position.y = 30;
-      camara3.position.x = 0;
+      camara3.position.z = 0;
+      camara3.position.y = 20;
+      camara3.position.x = 50;
+      camara3.lookAt(0, 0, 0);
       scene.add(camara3);
       camara4 = new THREE.PerspectiveCamera( 45, window.innerWidth/ window.innerHeight, 1, 1000 ); //PARTE DELANTERA
       camara4.position.z = 110;
       camara4.position.y = 30;
       camara4.position.x = 0;
+      camara4.lookAt(0, 0, 0);
       scene.add(camara4);
       camara5 = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 ); //PARTE LATERAL 1
       camara5.position.z = 110;
       camara5.position.y = 30;
       camara5.position.x = 0;
+      camara5.lookAt(0, 0, 0);
       scene.add(camara5);
       mainCamera = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 ); //PARTE LATERAL 1
-      mainCamera.position.z = 110;
+      mainCamera.position.z = -110;
       mainCamera.position.y = 30;
       mainCamera.position.x = 0;
+      mainCamera.lookAt(0, 0, 0);
       scene.add(mainCamera);
     }
     else{
       camara1 = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 ); //VISTA PLANTA
-      // camara1.position.z = 50;
-      camara1.position.z = 110;
+      camara1.position.z = -110;
       camara1.position.y = 30;
       camara1.position.x = 0;
+      camara1.lookAt(0, 0, 0);
+
       scene.add(camara1);
       camara2 = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 ); //PARTE TRASERA
       camara2.position.z = 110;
       camara2.position.y = 30;
       camara2.position.x = 0;
+      camara2.lookAt(0, 0, 0);
       scene.add(camara2);
       camara3 = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 ); //PARTE LATERAL2
-      camara3.position.z = 110;
-      camara3.position.y = 30;
-      camara3.position.x = 0;
+      camara3.position.z = -15;
+      camara3.position.y = 40;
+      camara3.position.x = 100;
+      camara3.lookAt(0, 0, 0);
+
       scene.add(camara3);
       camara4 = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 ); //PARTE DELANTERA
       camara4.position.z = 110;
       camara4.position.y = 30;
       camara4.position.x = 0;
+      camara4.lookAt(0, 0, 0);
+
       scene.add(camara4);
       camara5 = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 ); //PARTE LATERAL 1
       camara5.position.z = 110;
       camara5.position.y = 30;
       camara5.position.x = 0;
+      camara5.lookAt(0, 0, 0);
+
       scene.add(camara5);
       mainCamera = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 ); //PARTE LATERAL 1
-      mainCamera.position.z = 110;
+      mainCamera.position.z = -110;
       mainCamera.position.y = 30;
       mainCamera.position.x = 0;
+      mainCamera.lookAt(0, 0, 0);
       scene.add(mainCamera);
     }
     const controls = new OrbitControls( mainCamera, renderer.domElement );
 
+    renderer.setClearColor( 0xffecb0, 1 );
 
     scene.add( new THREE.AmbientLight( 0x443333,2) );
 
