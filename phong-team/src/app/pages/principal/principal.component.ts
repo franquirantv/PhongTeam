@@ -74,16 +74,20 @@ export class PrincipalComponent implements OnInit {
 
   closeModal2() {
     this.showModal = false;
-    this.renderer.removeStyle(document.body, 'overflow');
-    this.renderer.removeStyle(document.body, 'position');
-    this.renderer.removeStyle(document.body, 'width');
+    this.addScroll();
   }
 
   removeScroll() {
     this.renderer.setStyle(document.body, 'overflow', 'hidden');
     this.renderer.setStyle(document.body, 'position', 'fixed');
     this.renderer.setStyle(document.body, 'width', '100%');
-    window.scrollTo(0, this.scrollPosition);
+    // window.scrollTo(0, this.scrollPosition);
+  }
+
+  addScroll(){
+    this.renderer.removeStyle(document.body, 'overflow');
+    this.renderer.removeStyle(document.body, 'position');
+    this.renderer.removeStyle(document.body, 'width');
   }
 
 
@@ -101,36 +105,35 @@ export class PrincipalComponent implements OnInit {
     this.openModal2();
   }
 
+
+  images:any = [];
   generarImagenes() {
     this.engServ.cargarCoche(this.fileUploaded);
-    console.log(this.engServ.captureScreenshots());
+    this.images = this.engServ.captureScreenshots();
+    console.log(this.images);
   }
-
-  //IMAGENES///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  images = [
-    './../../../assets/spiderman.jpg',
-    './../../../assets/spiderman.jpg',
-    './../../../assets/spiderman.jpg',
-    './../../../assets/spiderman.jpg',
-    './../../../assets/spiderman.jpg',
-    './../../../assets/spiderman.jpg',
-    './../../../assets/spiderman.jpg',
-    './../../../assets/spiderman.jpg',
-    './../../../assets/spiderman.jpg',
-    './../../../assets/spiderman.jpg',
-    './../../../assets/spiderman.jpg',
-    // ... más imágenes
-  ];
 
   selectedImage: string | null = null;
 
   openModal(image: string) {
+    this.removeScroll();
     this.selectedImage = image;
   }
 
   closeModal() {
+    this.addScroll();
     this.selectedImage = null;
   }
 
-
+  downloadImage(url: string) {
+    if (url) {
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'nombre_de_tu_imagen'; // Puedes establecer un nombre aquí
+      link.target = '_blank'; // Abre en una nueva ventana/tabla
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  }
 }

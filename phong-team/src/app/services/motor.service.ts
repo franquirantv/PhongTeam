@@ -15,7 +15,6 @@ import { SharedState } from '../store/shared/shared.state';
 
 let renderer: THREE.WebGLRenderer, scene: THREE.Object3D, camera: THREE.Camera, stats;
 let mesh;
-let coche = "C:\Users\amban\PhongTeam\phong-team\src\assets\coches\Audi.gltf";
 let camara1: THREE.Camera;
 let camara2: THREE.Camera;
 let camara3: THREE.Camera;
