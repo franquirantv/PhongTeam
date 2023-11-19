@@ -115,19 +115,53 @@ export class PrincipalComponent implements OnInit {
     this.engServ.cargarCoche(this.fileUploaded);
 
     this.images = this.engServ.captureScreenshots();
+
+    this.editImage(this.images[0]);
     console.log(this.images);
   }
 
   selectedImage: string | null = null;
 
-  openModal(image: string) {
+  imagePosition: number | null = null;
+
+  openModal(image: string, position: number) {
     this.removeScroll();
     this.selectedImage = image;
+    this.imagePosition = position;
   }
 
   closeModal() {
     this.addScroll();
     this.selectedImage = null;
+    this.imagePosition = null;
+  }
+
+  imagenDerecha() {
+    if (this.selectedImage !== null && this.imagePosition !== null) {
+      const newIndex = this.imagePosition + 1;
+      if(newIndex<this.images.length){
+        this.selectedImage = this.images[newIndex].currentSrc;
+        this.imagePosition = newIndex;
+      }else{
+        const newIndex = 0;
+        this.selectedImage = this.images[newIndex].currentSrc;
+        this.imagePosition = newIndex;
+      }
+    }
+  }
+
+  imagenIzquierda() {
+    if (this.selectedImage !== null && this.imagePosition !== null) {
+      const newIndex = this.imagePosition - 1;
+      if(newIndex<0){
+        const newIndex = this.images.length -1;
+        this.selectedImage = this.images[newIndex].currentSrc;
+        this.imagePosition = newIndex;
+      }else{
+        this.selectedImage = this.images[newIndex].currentSrc;
+        this.imagePosition = newIndex;
+      }
+    }
   }
 
   downloadImage(url: string) {
@@ -140,5 +174,35 @@ export class PrincipalComponent implements OnInit {
       link.click();
       document.body.removeChild(link);
     }
+  }
+
+  editImage(imageUrl: string) {
+    // Lógica para agregar texto a la imagen
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d')!;
+
+      // Establecer el tamaño del lienzo igual al tamaño de la imagen
+      canvas.width = img.width;
+      canvas.height = img.height;
+
+      // Dibujar la imagen en el lienzo
+      ctx.drawImage(img, 0, 0);
+
+      // Agregar texto al lienzo
+      ctx.font = '30px Arial';
+      ctx.fillStyle = 'white';
+      ctx.fillText('¡Hola, Mundo!', 50, 50);
+
+      // Obtener la nueva imagen con texto
+      const editedImageUrl = canvas.toDataURL();
+
+      // Puedes mostrar la imagen resultante o realizar otras acciones
+      console.log('Imagen editada:', editedImageUrl);
+    };
+
+    // Establecer la fuente de la imagen
+    // img.src = imageUrl;
   }
 }

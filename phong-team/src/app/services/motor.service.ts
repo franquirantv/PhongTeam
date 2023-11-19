@@ -145,7 +145,7 @@ public coche = "";
     }
     const controls = new OrbitControls( mainCamera, renderer.domElement );
 
-    renderer.setClearColor( 0xffecb0, 1 );
+    renderer.setClearColor( 0x44444, 1 );
 
     scene.add( new THREE.AmbientLight( 0x443333,2) );
 
@@ -223,10 +223,7 @@ public render(): void {
   });
 
   renderer.render( scene, mainCamera );
-  // renderer.render( scene, camara2 );
-  // renderer.render( scene, camara3 );
-  // renderer.render( scene, camara4 );
-  // renderer.render( scene, camara5 );
+
 
 }
 public imagenes:any = [];
@@ -263,12 +260,11 @@ captureScreenshot(camera: THREE.Camera, filename: string) {
   let image = new Image();
   image.src = dataURL;
 
-  console.log(`Screenshot captured from camera ${camera.name}:`, dataURL);
+  // console.log(`Screenshot captured from camera ${camera.name}:`, dataURL);
 
 
   return image;
   // Puedes utilizar dataURL, por ejemplo, para mostrar la imagen en tu aplicación o guardarla.
-  console.log(`Screenshot captured from camera ${camera.name}:`, dataURL);
 }
 
 

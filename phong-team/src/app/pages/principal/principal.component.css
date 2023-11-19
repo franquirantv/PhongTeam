@@ -94,41 +94,107 @@
 
 
 /* Estilos del modal */
-
 .modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* width: 100%;
+  height: 100%; */
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow: auto;
 }
 
 .modal-content {
-    position: relative;
-    text-align: center;
-    max-width: 75vw;
-    max-height: 400px;
-    margin: auto;
+  position: relative;
+  text-align: center;
+  max-height: 80vh;
+  max-width: 150vh;
+  /* 75% de la altura visible menos 20px (ajusta según tus necesidades) */
+  margin: auto;
 }
 
 .modal img {
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
-.close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    color: white;
-    cursor: pointer;
+.close-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  /* Ajusta según el tamaño deseado */
+  height: 30px;
+  /* Ajusta según el tamaño deseado */
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.close-icon {
+  font-size: 18px;
+  /* Ajusta según el tamaño deseado */
+  color: white;
+}
+
+.arrows-container {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrow-container {
+  width: 40px;
+  /* Ajusta según el tamaño deseado */
+  height: 40px;
+  /* Ajusta según el tamaño deseado */
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1;
+  /* Añade un índice z para que estén sobre el modal */
+}
+
+.left-arrow-container,
+.right-arrow-container {
+  position: absolute;
+  top: 50%;
+  /* Centra verticalmente con respecto al modal */
+  transform: translateY(-50%);
+}
+
+.left-arrow-container {
+  left: 10px;
+  /* Ajusta según la distancia deseada del modal */
+}
+
+.right-arrow-container {
+  right: 10px;
+  /* Ajusta según la distancia deseada del modal */
+}
+
+.arrow {
+  font-size: 24px;
+  /* Ajusta según el tamaño deseado */
+  color: white;
+}
+
+.arrow-container:hover {
+  background-color: rgb(121, 121, 121, 0.7);
 }
