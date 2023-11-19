@@ -37,6 +37,7 @@ export class PrincipalComponent implements OnInit {
     this.scrollPosition = window.scrollY;
   }
   fileUploaded: File = new File([], '');
+  textoPublicitario: string = '' ;
 
   onFileSelected(event: any) {
     if (event.target.files && event.target.files[0]) {
@@ -62,8 +63,7 @@ export class PrincipalComponent implements OnInit {
         if (this.fileUploaded.type === 'model/gltf+json' || this.fileUploaded.name.endsWith('.gltf') || this.fileUploaded.name.endsWith('.glb')) {
           this.engServ.cargarCoche(this.fileUploaded);
           this.closeModal2();
-          // this.fileForm.get('fileName')?.setValue(event.target.);
-
+          this.textoPublicitario = this.fileForm.get('text')?.value ?? '';
         } else {
           console.error('Invalid file format. Please select a GLTF file.');
         }
@@ -117,7 +117,7 @@ export class PrincipalComponent implements OnInit {
   async generarImagenes() {
     this.engServ.cargarCoche(this.fileUploaded);
 
-    this.images = this.engServ.captureScreenshots('MIRA Q WAPO EL CARRO ESTE');
+    this.images = this.engServ.captureScreenshots(this.textoPublicitario);
 
     // this.editImage(this.images[0]);
     console.log(this.images);
