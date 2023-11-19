@@ -5,7 +5,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/franquirantv/phone-team">
-    <img src="phong-team\src\assets\logoPhong.png" alt="Logo" width="83" height="83">
+    <img src="phong-team\src\assets\logoPhong.png" alt="Logo" width="83" height="83" style="background-color:white">
   </a>
 
   <h3 align="center">AutoFrame</h3>
@@ -58,7 +58,9 @@ La aplicación ha sido desarrollada con Angular + Bootstrap.
 
 * [![Angular][Angular.io]][Angular-url]
 * [![Typescript][Typescript]][Typescript-url]
+* [![Three.js][Three.js]][Three-url]
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
+
 
 <!-- GETTING STARTED -->
 ## Configuración y ejecución
@@ -148,3 +150,6 @@ Enlace del proyecto: [https://github.com/franquirantv/phong-team](https://github
 
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com
+
+[Three.js]: https://img.shields.io/badge/Three.js-ffffff?style=for-the-badge&logo=threedotjs&logoColor=black
+[Three-url]: https://threejs.org
