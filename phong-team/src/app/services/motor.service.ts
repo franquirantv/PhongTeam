@@ -76,18 +76,29 @@ public coche = "";
       scene.add(camara5);
     }
     else{
-      camera = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 );
-      camera.position.z = 180;
-      camera.position.y = 30;
-      camara1 = camera;
+      camara1 = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 ); //VISTA PLANTA
+      camara1.position.z = 50;
+      camara1.position.y = 240;
       scene.add(camara1);
-      camara2 = camera;
+      camara2 = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 ); //PARTE TRASERA
+      camara2.position.z = 110;
+      camara2.position.y = 30;
+      camara2.position.x = 0;
       scene.add(camara2);
-      camara3 = camera;
+      camara3 = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 ); //PARTE LATERAL2
+      camara3.position.z = 0;
+      camara3.position.y = 30;
+      camara3.position.x = -130;
       scene.add(camara3);
-      camara4 = camera;
+      camara4 = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 ); //PARTE DELANTERA
+      camara4.position.z = -110;
+      camara4.position.y = 30;
+      camara4.position.x = 0;
       scene.add(camara4);
-      camara5 = camera;
+      camara5 = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 ); //PARTE LATERAL 1
+      camara5.position.z = 0;
+      camara5.position.y = 30;
+      camara5.position.x = 120;
       scene.add(camara5);
     }
     const controls = new OrbitControls( camera, renderer.domElement );
@@ -193,14 +204,6 @@ captureScreenshot(camera: THREE.Camera, filename: string) {
   const canvas = renderer.domElement;
   const dataURL = canvas.toDataURL('image/png');
 
-  // switch (camera.name) {
-  //   case value:
-
-  //     break;
-
-  //   default:
-  //     break;
-  // }
   image.src = dataURL;
   return image;
   // Puedes utilizar dataURL, por ejemplo, para mostrar la imagen en tu aplicación o guardarla.
