@@ -135,9 +135,9 @@ public coche = "";
 
       camara5 = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 ); //PARTE LATERAL 1
       camara5.position.z = -100;
-      camara5.position.y = 50;
+      camara5.position.y = 40;
       camara5.position.x = -60;
-      camara5.lookAt(0, 0, 0);
+      camara5.lookAt(0, -10, 0);
       scene.add(camara5);
 
       mainCamera = new THREE.PerspectiveCamera( 45, window.innerWidth*0.75/ window.innerHeight, 1, 1000 ); //PARTE LATERAL 1
