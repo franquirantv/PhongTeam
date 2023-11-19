@@ -24,6 +24,7 @@ export class PrincipalComponent implements OnInit {
   showLoading$: Observable<boolean> | undefined;
 
   fileForm = this.fb.group({
+    text: [''],
     fileName: ['', Validators.required],
     fileExtension: ['']
   });
@@ -50,6 +51,7 @@ export class PrincipalComponent implements OnInit {
 
   onUpload(event: any){
     event.preventDefault();
+    console.log(event)
     this.submitted = true;
     console.log(this.fileForm.valid)
     if (this.fileForm.valid) {
@@ -60,6 +62,7 @@ export class PrincipalComponent implements OnInit {
         if (this.fileUploaded.type === 'model/gltf+json' || this.fileUploaded.name.endsWith('.gltf') || this.fileUploaded.name.endsWith('.glb')) {
           this.engServ.cargarCoche(this.fileUploaded);
           this.closeModal2();
+          // this.fileForm.get('fileName')?.setValue(event.target.);
 
         } else {
           console.error('Invalid file format. Please select a GLTF file.');
@@ -114,9 +117,9 @@ export class PrincipalComponent implements OnInit {
   async generarImagenes() {
     this.engServ.cargarCoche(this.fileUploaded);
 
-    this.images = this.engServ.captureScreenshots();
+    this.images = this.engServ.captureScreenshots('MIRA Q WAPO EL CARRO ESTE');
 
-    this.editImage(this.images[0]);
+    // this.editImage(this.images[0]);
     console.log(this.images);
   }
 
@@ -176,33 +179,29 @@ export class PrincipalComponent implements OnInit {
     }
   }
 
-  editImage(imageUrl: string) {
-    // Lógica para agregar texto a la imagen
-    const img = new Image();
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d')!;
+  // editImage(img: HTMLImageElement) {
+  //   // Lógica para agregar texto a la imagen
+  //   console.log('Imagen sin editar:', img);
 
-      // Establecer el tamaño del lienzo igual al tamaño de la imagen
-      canvas.width = img.width;
-      canvas.height = img.height;
+  //   const canvas = document.createElement('canvas');
+  //   const context = canvas.getContext('2d');
 
-      // Dibujar la imagen en el lienzo
-      ctx.drawImage(img, 0, 0);
+  //   const width = window.innerWidth;
+  //   const height = window.innerHeight;
 
-      // Agregar texto al lienzo
-      ctx.font = '30px Arial';
-      ctx.fillStyle = 'white';
-      ctx.fillText('¡Hola, Mundo!', 50, 50);
+  //   canvas.width = width;
+  //   canvas.height = height;
 
-      // Obtener la nueva imagen con texto
-      const editedImageUrl = canvas.toDataURL();
+  //   context?.drawImage(renderer.domElement, 0, 0, width, height);
 
-      // Puedes mostrar la imagen resultante o realizar otras acciones
-      console.log('Imagen editada:', editedImageUrl);
-    };
+  //   const dataURL = canvas.toDataURL('image/png');
+  //   let image = new Image();
+  //   image.src = dataURL;
 
-    // Establecer la fuente de la imagen
-    // img.src = imageUrl;
-  }
+  //   let editedDataURL = canvas.toDataURL();
+
+
+  //   // Puedes mostrar la imagen resultante o realizar otras acciones
+  //   console.log('Imagen editada:', editedDataURL);
+  // }
 }

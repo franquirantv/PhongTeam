@@ -227,23 +227,23 @@ public render(): void {
 
 }
 public imagenes:any = [];
-captureScreenshots() {
+captureScreenshots(text: string) {
   this.imagenes = [];
   // this.captureScreenshot(camara1, 'screenshot1.png');
-  this.imagenes.push(this.captureScreenshot(camara1, 'screenshot1.png'));
+  this.imagenes.push(this.captureScreenshot(camara1, 'screenshot1.png', text));
   // this.captureScreenshot(camara2, 'screenshot2.png');
-  this.imagenes.push(this.captureScreenshot(camara2, 'screenshot2.png'));
+  this.imagenes.push(this.captureScreenshot(camara2, 'screenshot2.png', text));
   // this.captureScreenshot(camara3, 'screenshot3.png');
-  this.imagenes.push(this.captureScreenshot(camara3, 'screenshot3.png'));
+  this.imagenes.push(this.captureScreenshot(camara3, 'screenshot3.png', text));
   // this.captureScreenshot(camara4, 'screenshot4.png');
-  this.imagenes.push(this.captureScreenshot(camara4, 'screenshot4.png'));
+  this.imagenes.push(this.captureScreenshot(camara4, 'screenshot4.png', text));
   // this.captureScreenshot(camara5, 'screenshot5.png');
-  this.imagenes.push(this.captureScreenshot(camara5, 'screenshot5.png'));
+  this.imagenes.push(this.captureScreenshot(camara5, 'screenshot5.png', text));
   // Puedes seguir capturando más capturas desde otras cámaras según sea necesario.
   return this.imagenes;
 }
 
-captureScreenshot(camera: THREE.Camera, filename: string) {
+captureScreenshot(camera: THREE.Camera, filename: string, text: string) {
   const canvas = document.createElement('canvas');
   const context = canvas.getContext('2d');
 
@@ -255,17 +255,21 @@ captureScreenshot(camera: THREE.Camera, filename: string) {
   renderer.render(scene, camera);
 
   context?.drawImage(renderer.domElement, 0, 0, width, height);
+  if (context) {
+    context.font = '30px Georgia';
+    context.fillStyle = 'white';
+    const textWidth = context.measureText(text).width;
+    const textHeight = 30;
+    context.fillText(text, (width - textWidth) / 2, height - textHeight - 10);
+     }
+
 
   const dataURL = canvas.toDataURL('image/png');
   let image = new Image();
   image.src = dataURL;
 
-  // console.log(`Screenshot captured from camera ${camera.name}:`, dataURL);
-
-
   return image;
-  // Puedes utilizar dataURL, por ejemplo, para mostrar la imagen en tu aplicación o guardarla.
-}
+ }
 
 
 
